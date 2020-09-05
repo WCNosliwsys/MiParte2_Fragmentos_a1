@@ -1,6 +1,9 @@
 package com.ditec.miparte2_fragmentos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MainActivity.this,(String)mispinner.getSelectedItem() , Toast.LENGTH_SHORT).show();
+                Fragment FragmentoSeleccionado = null;
+                switch (i){
+                    case 0:
+                        FragmentoSeleccionado= new ListaFragmento();
+                        break;
+                    case 1:
+                        FragmentoSeleccionado= new GridFragmento();
+                }
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragmento,FragmentoSeleccionado);
+                transaction.commit();
             }
 
             @Override
